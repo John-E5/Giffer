@@ -1,11 +1,23 @@
 import React, { useEffect } from 'react';
 import { fetchTrendingGifs } from '../api/giphyApi';
+import { Container, Box } from '@mui/material';
+import GifferGrid from '../components/GifferGrid';
+import { useGifs } from '../context/GifferContext';
 
 const Home: React.FC = () => {
+  const { state, dispatch } = useGifs();
 
   const getTrendingGifs = async () => {
-    const gifs = await fetchTrendingGifs();
-    console.log(gifs);
+    try {
+      const gifs = await fetchTrendingGifs();
+  
+      dispatch({ 
+        type: 'FETCH_GIFS_SUCCESS', 
+        payload: gifs 
+      });
+    } catch {
+      dispatch({ type: 'FETCH_GIFS_ERROR', payload: 'Failed to load GIFs' });
+    }
   }
 
   useEffect(() => {
@@ -13,7 +25,11 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <h1>Home</h1>
+    <Container maxWidth="xl">
+      <Box sx={{ my: 4 }}>
+        <GifferGrid gifs={state.gifs} />
+      </Box>
+    </Container>
   )
 }
 
