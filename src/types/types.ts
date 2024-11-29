@@ -10,6 +10,10 @@ export interface Gif {
   };
 }
 
+export interface GiphyResponse {
+  data: Gif[];
+}
+
 export interface GifferState {
   gifs: Gif[];
   loading: boolean;
@@ -18,5 +22,5 @@ export interface GifferState {
 
 export type GifferAction = 
   | { type: 'FETCH_GIFS_START' }
-  | { type: 'FETCH_GIFS_SUCCESS'; payload: Gif[] }
+  | { type: 'FETCH_GIFS_SUCCESS'; payload: { gifs: Gif[] }}
   | { type: 'FETCH_GIFS_ERROR'; payload: string };

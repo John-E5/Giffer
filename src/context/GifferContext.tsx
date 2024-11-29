@@ -17,7 +17,7 @@ const gifferReducer = (state: GifferState, action: GifferAction): GifferState =>
     case 'FETCH_GIFS_START':
       return { ...state, loading: true, error: null };
     case 'FETCH_GIFS_SUCCESS':
-      return { ...state, loading: false, gifs: action.payload };
+      return { ...state, loading: false, gifs: action.payload.gifs };
     case 'FETCH_GIFS_ERROR':
       return { ...state, loading: false, error: action.payload };
     default:

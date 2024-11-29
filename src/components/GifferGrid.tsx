@@ -15,7 +15,7 @@ const GifferGrid: React.FC<GifferGridProps> = ({ gifs, loading = false }) => {
       <Grid container spacing={2} sx={{ p: 2 }}>
         {[...Array(12)].map((_, index) => (
           <Grid size={{ xs:12, sm:6, md:4 }} key={index}>
-            <Skeleton variant="rectangular" height={200} animation="wave" />
+            <Skeleton variant="rectangular" height={200} width={300} animation="wave" />
           </Grid>
         ))}
       </Grid>
