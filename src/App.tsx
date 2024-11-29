@@ -1,11 +1,21 @@
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react'
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
 import Navbar from './components/Navbar'
 
-function App() {
+const theme = createTheme({
+  palette: {
+    mode: 'dark'
+  }
+});
+
+const App: React.FC = () => {
 
   return (
-    <Navbar />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Navbar />
+    </ThemeProvider>
   )
 }
 
