@@ -9,3 +9,14 @@ export interface Gif {
     };
   };
 }
+
+export interface GifferState {
+  gifs: Gif[];
+  loading: boolean;
+  error: string | null;
+}
+
+export type GifferAction = 
+  | { type: 'FETCH_GIFS_START' }
+  | { type: 'FETCH_GIFS_SUCCESS'; payload: Gif[] }
+  | { type: 'FETCH_GIFS_ERROR'; payload: string };
