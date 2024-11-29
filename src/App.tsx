@@ -5,6 +5,7 @@ import { createTheme } from '@mui/material/styles';
 import Navbar from './components/Navbar'
 import Home from './pages/Home';
 import { GifferProvider } from './context/GifferContext';
+import SavedGifs from './pages/SavedGifs';
 
 const theme = createTheme({
   palette: {
@@ -22,6 +23,7 @@ const App: React.FC = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/saved" element={<SavedGifs />} />
           </Routes>
         </BrowserRouter>
       </GifferProvider>

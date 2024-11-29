@@ -1,7 +1,10 @@
 import React from 'react';
-import { Card, CardMedia, CardActions, Skeleton } from '@mui/material';
+import { Card, CardMedia, CardActions, Skeleton, IconButton } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { Gif } from '../types/types';
+import { useGifs } from '../context/GifferContext';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 interface GifferGridProps {
   gifs: Gif[];
@@ -9,7 +12,12 @@ interface GifferGridProps {
 }
 
 const GifferGrid: React.FC<GifferGridProps> = ({ gifs, loading = false }) => {
+  const { state, dispatch } = useGifs();
 
+  const handleSaveGif = (gif: Gif) => {
+    dispatch({ type: 'TOGGLE_SAVE_GIF', payload: gif });
+  };
+  
   if (loading) {
     return (
       <Grid container spacing={2} sx={{ p: 2 }}>
@@ -33,7 +41,24 @@ const GifferGrid: React.FC<GifferGridProps> = ({ gifs, loading = false }) => {
               alt={gif.title}
               sx={{ height: 200, objectFit: 'cover' }}
             />
-            <CardActions />
+            <CardActions disableSpacing>
+              <IconButton
+                onClick={() => handleSaveGif(gif)}
+                color={state.savedGifs.some(savedGif => savedGif.id === gif.id) ? 'secondary' : 'default'}
+                sx={{
+                  transition: 'transform 0.2s',
+                  '&:active': {
+                    transform: 'scale(1.2)',
+                  },
+                }}
+              >
+                {state.savedGifs.some(savedGif => savedGif.id === gif.id) ? (
+                  <FavoriteIcon />
+                ) : (
+                  <FavoriteBorderIcon />
+                )}
+              </IconButton>
+            </CardActions>
           </Card>
         </Grid>
       ))}
