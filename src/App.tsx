@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import Navbar from './components/Navbar'
+import Home from './pages/Home';
 
 const theme = createTheme({
   palette: {
@@ -18,7 +19,7 @@ const App: React.FC = () => {
       <BrowserRouter>
       <Navbar />
         <Routes>
-          <Route path='/' element={<h1>Home</h1>} />
+          <Route path='/' element={<Home />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
